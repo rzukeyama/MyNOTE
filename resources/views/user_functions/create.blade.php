@@ -77,7 +77,7 @@
         </div>
     </div>
 
-    <form method="POST" action="/user_functions">
+    <form method="POST" action="/user_functions" autocomplete="off">
         @csrf
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         <div class="row mt-5">

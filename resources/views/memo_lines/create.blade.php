@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    <form method="POST" action="/memo_lines">
+    <form method="POST" action="/memo_lines" autocomplete="off">
         @csrf
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         <div class="row mt-5">

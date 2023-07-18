@@ -51,7 +51,7 @@ class UserFunctionsController extends Controller
             // 例外
         }
 
-        return redirect()->route('/user_functions')->with('success', GeneralMessages::USERFUNCTIONS_ADDED);
+        return redirect()->route('user_functions')->with('success', GeneralMessages::USERFUNCTIONS_ADDED);
     }
 
     /**

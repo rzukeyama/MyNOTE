@@ -17,8 +17,7 @@
                 ここでは、利用者名の設定や変更ができます。
             </p>
             <ul>
-                <li>パスワードは8文字以上で設定しなければなりません</li>
-                <li>忘れにくく、推測されにくいパスワードをおすすめします</li>
+                <li>利用者名は15文字以内で設定してください</li>
             </ul>
         </div>
     </div>
@@ -44,7 +43,7 @@
             @endif
         </div>
     </div>
-<form name="challenge" action="/user/change_name" method="POST">
+<form name="challenge" action="/user/change_name" method="POST" autocomplete="off">
     @csrf
     <div class="row mt-2 d-grid gap-2">
         <div class="col-auto">
@@ -56,7 +55,7 @@
     <div class="row mt-2 d-grid gap-2">
         <div class="col-auto">
             <label for="name" class="form-label">設定後の利用者名</label>
-            <input class="form-control" id="name" type="text" name="display_name" placeholder="">
+            <input class="form-control" id="name" type="text" name="display_name" placeholder="" maxlength="15">
         </div>
     </div>
 

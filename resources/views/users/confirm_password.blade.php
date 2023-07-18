@@ -40,7 +40,7 @@
             @endif
         </div>
     </div>
-<form name="challenge" action="/user/confirm_password" method="POST">
+<form name="challenge" action="/user/confirm_password" method="POST" autocomplete="off">
     @csrf
     <div class="row mt-2 d-grid gap-2">
         <div class="col-auto">

@@ -99,7 +99,7 @@ class UserController extends Controller
     public function changeDisplayName (Request $request): RedirectResponse
     {
         $request->validate([
-            'display_name' => 'required',
+            'display_name' => 'required|max:15',
         ]);
 
         if ($request->input('display_name') === Auth::user()->display_name) {
