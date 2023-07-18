@@ -43,10 +43,10 @@ Route::middleware('auth')->group(function() {
     Route::post('/user/change_password', [\App\Http\Controllers\UserController::class, 'changePassword']);
 
     // UserFunctionsController
-    Route::resource('user_functions', \App\Http\Controllers\UserFunctionsController::class);
+    Route::resource('/user_functions', \App\Http\Controllers\UserFunctionsController::class);
 
     // LineMemosController
-    Route::resource('memo_lines', \App\Http\Controllers\MemoLinesController::class);
+    Route::resource('/memo_lines', \App\Http\Controllers\MemoLinesController::class);
 
     /**
      * 利用者情報変更のため、再度パスワード認証が必要なRoute

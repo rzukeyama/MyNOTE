@@ -61,7 +61,7 @@
             <table class="table">
                 @foreach ($userFunctions as $func)
                     <tr>
-                        <td>{{ $func->name }}</td>
+                        <td>{{ $func->function->name }}</td>
                     </tr>
                 @endforeach
             </table>

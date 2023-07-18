@@ -42,7 +42,7 @@ class UserFunctionsController extends Controller
     {
         $validated = $request->validate([
             'function_id' => 'required',
-            'user_id' => 'required'
+            'user_id' => 'required|unique:user_functions,user_id',
         ]);
 
         $userFunctions = new UserFunction();
@@ -51,7 +51,7 @@ class UserFunctionsController extends Controller
             // 例外
         }
 
-        return redirect()->route('user_functions')->with('success', GeneralMessages::USERFUNCTIONS_ADDED);
+        return redirect('/')->with('success', GeneralMessages::USERFUNCTIONS_ADDED);
     }
 
     /**
