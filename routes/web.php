@@ -58,11 +58,7 @@ Route::middleware('auth')->group(function() {
         Route::post('/user/change_name', [\App\Http\Controllers\UserController::class, 'changeDisplayName']);
     });
 
-    Route::get('/mailable', function () {
-        $user = \App\Models\User::where('email', 'yuehan.qishi.lu@gmail.com')->first();
-
-        return new \App\Mail\UserCreated($user);
-    });
+    Route::get('/testmail', [\App\Http\Controllers\HomeController::class, 'testmail']);
 });
 
 function httpGetPost()
