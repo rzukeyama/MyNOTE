@@ -56,6 +56,9 @@ Route::middleware('auth')->group(function() {
 
         Route::view('/user/change_name', '/users/change_name');
         Route::post('/user/change_name', [\App\Http\Controllers\UserController::class, 'changeDisplayName']);
+
+        Route::view('/user/delete', '/users/delete');
+        Route::post('/user/delete', [\App\Http\Controllers\UserController::class, 'delete']);
     });
 
     Route::get('/testmail', [\App\Http\Controllers\HomeController::class, 'testmail']);

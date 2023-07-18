@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Mail\UserCreated;
 use App\Messages\GeneralMessages;
+use App\Models\MemoLine;
 use App\Models\User;
+use App\Models\UserFunction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -113,6 +115,25 @@ class UserController extends Controller
         }
 
         return redirect('/')->with('success', GeneralMessages::CONFIG_NAME_CHANGED);
+    }
+
+    public function delete (Request $request)
+    {
+        $request->validate([
+            'delete' => 'accepted',
+        ]);
+
+        // ユーザ関連データを削除
+        UserFunction::where('user_id', Auth::user()->id)->delete();
+        MemoLine::where('user_id', Auth::user()->id)->delete();
+
+        User::find(Auth::user()->id)->delete();
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('利用者データの削除が完了しました。ご利用ありがとうございました。');
     }
 
 }
