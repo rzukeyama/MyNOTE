@@ -8,6 +8,7 @@ use App\Models\UserFunction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rule;
 
 class UserFunctionsController extends Controller
 {
@@ -40,9 +41,10 @@ class UserFunctionsController extends Controller
      */
     public function store(Request $request)
     {
+        //TODO: function_idとuser_id両方でuniqueとする処理を追加してください
         $validated = $request->validate([
             'function_id' => 'required',
-            'user_id' => 'required|unique:user_functions,user_id',
+            'user_id' => 'required',
         ]);
 
         $userFunctions = new UserFunction();

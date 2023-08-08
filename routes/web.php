@@ -48,6 +48,9 @@ Route::middleware('auth')->group(function() {
     // LineMemosController
     Route::resource('/memo_lines', \App\Http\Controllers\MemoLinesController::class);
 
+    // KeyValuesController
+    Route::resource('/key_values', \App\Http\Controllers\KeyValuesController::class);
+
     /**
      * 利用者情報変更のため、再度パスワード認証が必要なRoute
      */
