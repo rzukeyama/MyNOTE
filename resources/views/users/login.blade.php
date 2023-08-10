@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>利用者認証 | {{config('app.name')}}</title>
-    <link rel="stylesheet" href="./bootstrap.css">
+    <link rel="stylesheet" href="./sample.css">
 </head>
 <body>
 
