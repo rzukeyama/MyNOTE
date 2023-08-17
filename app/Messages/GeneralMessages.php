@@ -12,6 +12,7 @@ class GeneralMessages
 
     // ホーム
     const HOME_NAME_NOT_SET = "表示名が設定されていないようです。「設定」から表示名を設定しましょう！";
+    const HOME_FUNC_NOT_SET = "使用する機能が設定されていないようです。「機能」から使用する機能を選びましょう！";
 
     // ログアウト
     const LOGOUT_SUCCESSED = "ログアウトしました";

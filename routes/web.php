@@ -25,6 +25,7 @@ Route::get('/user/logout', [\App\Http\Controllers\UserController::class, 'logout
 // 認証が必要なページ
 Route::middleware('auth')->group(function() {
     Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+    //Route::get('/layoutest', [\App\Http\Controllers\HomeController::class, 'layoutest']);
 
     Route::get('/user/confirm_password', function() {
         return view('/users/confirm_password');
@@ -50,6 +51,9 @@ Route::middleware('auth')->group(function() {
 
     // KeyValuesController
     Route::resource('/key_values', \App\Http\Controllers\KeyValuesController::class);
+
+    // NotepadsController
+    Route::resource('/notepads', \App\Http\Controllers\NotepadsController::class);
 
     /**
      * 利用者情報変更のため、再度パスワード認証が必要なRoute

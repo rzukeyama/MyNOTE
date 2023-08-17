@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>利用者認証 | {{config('app.name')}}</title>
     <link rel="stylesheet" href="./sample.css">
+    <link rel="stylesheet" href="./bootstrap-icons-1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
 
@@ -23,7 +24,7 @@
         <div class="col">
             @if (session('error'))
             <div class="alert alert-warning">
-                {{ session('error') }}
+                <i class="bi bi-exclamation-octagon"></i> {{ session('error') }}
             </div>
             @endif
             @if (session('success'))

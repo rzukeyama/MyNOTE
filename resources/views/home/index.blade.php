@@ -1,61 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ホーム | {{config('app.name')}}</title>
-    <link rel="stylesheet" href="./sample.css">
-</head>
-<body>
+@extends('layouts.main')
+@section('pageTitle', 'ホーム')
+@section('js')
+@endsection
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">{{config('app.name')}}</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        機能
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @foreach ($userFunctions as $func)
-                            <li><a class="dropdown-item" href="/{{$func->function->route}}">{{$func->function->name}}</a></li>
+@section('contents')
+    <div class="container">
+
+        <div class="row mt-2">
+            <div class="col">
+                @if (session('error'))
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-octagon"></i> {{ session('error') }}
+                    </div>
+                @endif
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-warning">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
                         @endforeach
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a href="/user_functions" class="dropdown-item">機能設定</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ Auth::user()->display_name ?? 'ユーザー' }}
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a href="/user/change_password" class="dropdown-item">パスワードの変更</a></li>
-                        <li><a href="/user/change_name" class="dropdown-item">表示名の設定/変更</a></li>
-                        <li><a href="/user/delete" class="dropdown-item text-danger">{{config('app.name')}}をやめる(利用者情報の完全削除)</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a href="/user/logout" class="dropdown-item">利用を終了する(ログアウト)</a></li>
-                    </ul>
-                </li>
-            </ul>
+                    </div>
+                @endif
+            </div>
         </div>
+
+        @if (!is_null(Auth::user()->display_name))
+            <div class="row mt-2">
+                <div class="col">
+                    ようこそ {{ Auth::user()->display_name }} さん！
+                </div>
+            </div>
+        @endif
+
+        @if (\App\Models\UserFunction::isEnableFunction(Auth::user()->id, 1))
+        <form method="POST" action="/memo_lines" autocomplete="off">
+            @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            <div class="row mt-2">
+                <div class="h2">メモを追加</div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="text" name="memo" class="form-control-lg form-text" placeholder="メモをここに記載" maxlength="100">
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col">
+                    <input type="submit" class="btn btn-primary" value="保存">
+                </div>
+            </div>
+        </form>
+        @endif
+
     </div>
-</nav>
-
-<div class="container">
-
-@if (!is_null(Auth::user()->display_name))
-    <div class="row mt-2">
-        <div class="col">
-            ようこそ {{ Auth::user()->display_name }} さん！
-        </div>
-    </div>
-@endif
-</div>
-
-<script src="./js/bootstrap.min.js"></script>
-</body>
-</html>
+@endsection
