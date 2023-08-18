@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('pageTitle', '機能設定')
+@section('pageTitle', "編集/削除 $function->name")
 @section('js')
 @endsection
 @section('contents')
@@ -15,9 +15,9 @@
 
         <div class="row mt-2">
             <div class="col">
-                <div class="h1">{{config('app.name')}} 機能設定</div>
+                <div class="h1">編集/削除 {{$function->name}}</div>
                 <p>
-                    ここでは、あなたが{{config('app.name')}}で使用できる機能のカスタマイズを行うことができます。数ある機能の中から、あなたが使うものだけを選ぶことができます。
+
                 </p>
             </div>
         </div>
@@ -44,31 +44,31 @@
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div class="col">
-                <a href="{{ url("/user_functions/create") }}">機能を追加する</a>
+        <form method="POST" action="/todo_lists/{{$todo_list->id}}" autocomplete="off">
+            @method('PUT')
+            @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            <div class="row mt-5">
+                <div class="col">
+                    <input type="text" name="memo" class="form-control-lg form-text" placeholder="メモをここに記載" maxlength="100" value="{{$todo_list->todo}}">
+                </div>
             </div>
-        </div>
 
-        <div class="row mt-5">
-            <div class="col">
-                <h2>すべての機能一覧</h2>
+            <div class="row mt-3">
+                <div class="col">
+                    <input type="submit" class="btn btn-primary" value="保存">
+                </div>
             </div>
-        </div>
+        </form>
 
-        <div class="row mt-2">
-            <div class="col">
-                <ul class="list-group">
-                    @foreach ($allFunctions as $func)
-                    <li class="list-group-item">
-                        {{ $func->name }}
-                        @if (! \App\Models\UserFunction::isEnableFunction(Auth::user()->id, $func->id)) [使用する] @endif
-                    </li>
-                    @endforeach
-
-                </ul>
+        <form method="POST" action="/todo_lists/{{$todo_list->id}}">
+            @method('DELETE')
+            @csrf
+            <div class="row mt-3">
+                <div class="col">
+                    <input type="submit" class="btn btn-danger" value="削除">
+                </div>
             </div>
-        </div>
-
+        </form>
     </div>
 @endsection

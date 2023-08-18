@@ -1,7 +1,8 @@
 @extends('layouts.main')
-@section('pageTitle', '機能設定')
+@section('pageTitle', $function->name)
 @section('js')
 @endsection
+
 @section('contents')
     <div class="container">
 
@@ -15,9 +16,9 @@
 
         <div class="row mt-2">
             <div class="col">
-                <div class="h1">{{config('app.name')}} 機能設定</div>
+                <div class="h1">{{$function->name}}</div>
                 <p>
-                    ここでは、あなたが{{config('app.name')}}で使用できる機能のカスタマイズを行うことができます。数ある機能の中から、あなたが使うものだけを選ぶことができます。
+
                 </p>
             </div>
         </div>
@@ -44,31 +45,31 @@
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div class="col">
-                <a href="{{ url("/user_functions/create") }}">機能を追加する</a>
-            </div>
-        </div>
-
-        <div class="row mt-5">
-            <div class="col">
-                <h2>すべての機能一覧</h2>
-            </div>
-        </div>
-
         <div class="row mt-2">
             <div class="col">
-                <ul class="list-group">
-                    @foreach ($allFunctions as $func)
-                    <li class="list-group-item">
-                        {{ $func->name }}
-                        @if (! \App\Models\UserFunction::isEnableFunction(Auth::user()->id, $func->id)) [使用する] @endif
-                    </li>
-                    @endforeach
-
-                </ul>
+                <a href="/todo_lists/create">新たにメモを書く</a>
+            </div>
+            <div class="col">
+                <a href="/">ホームに戻る</a>
             </div>
         </div>
 
+        <div class="row mt-3">
+            <div class="col">
+                @if ($todo_list->count() === 0)
+                    <p>まだメモがありません。</p>
+                @endif
+                <div class="list-group">
+                    @foreach ($todo_list as $todo)
+                        <a href="/todo_lists/{{$todo->id}}/edit" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{$todo->todo}}</h5>
+                            </div>
+                            <small>{{$todo->created_at}}</small>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

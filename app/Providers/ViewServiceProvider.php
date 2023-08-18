@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use App\Http\View\Composers\MainComposer;
-use Illuminate\Support\Facades\View;
+use App\Models\UserFunction;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
 
 /**
  * ViewComposerの登録をするためのProviderクラス
@@ -25,14 +26,21 @@ class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         /**
-         * 機能を追加したらここにも追加（ここに追加されている機能全てのテンプレートにログイン情報をセットする）
+         * 指定テンプレート「以外」の全テンプレートに同じ変数を渡す処理
+         *
+         * ・ログインセッションがないページをリストに記載
          */
-        View::composer([
-            'home.*',
-            'key_values.*',
-            'memo_lines.*',
-            'user_functions.*',
-            'notepads.*',
-        ], MainComposer::class);
+        \Illuminate\Support\Facades\View::composer('*', function (View $view) {
+            $excludes = [
+                'create_user',
+                'users.login',
+                'emails.*',
+            ];
+            if (! in_array($view->getName(), $excludes)){
+                $view->with('userFunctions', UserFunction::where('user_id', Auth::user()->id)
+                    ->orderBy('id')
+                    ->get());
+            }
+        });
     }
 }

@@ -55,6 +55,9 @@ Route::middleware('auth')->group(function() {
     // NotepadsController
     Route::resource('/notepads', \App\Http\Controllers\NotepadsController::class);
 
+    // TodoListsController
+    Route::resource('/todo_lists', \App\Http\Controllers\TodoListsController::class);
+
     /**
      * 利用者情報変更のため、再度パスワード認証が必要なRoute
      */
