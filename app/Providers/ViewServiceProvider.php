@@ -37,7 +37,7 @@ class ViewServiceProvider extends ServiceProvider
                 'emails.*',
             ];
             if (! in_array($view->getName(), $excludes)){
-                $view->with('userFunctions', UserFunction::where('user_id', Auth::user()->id)
+                $view->with('userFunctions', UserFunction::where('user_id', \Illuminate\Support\Facades\Auth::user()->id)
                     ->orderBy('id')
                     ->get());
             }
