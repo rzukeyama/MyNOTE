@@ -47,7 +47,7 @@
         <form method="POST" action="/todo_lists" autocomplete="off">
             @csrf
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-            <div class="row mt-5">
+            <div class="row mt-2">
                 <div class="col">
                     <input type="text" name="todo" class="form-control form-control-lg" placeholder="○○をやる" maxlength="100">
                 </div>

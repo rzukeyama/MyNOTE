@@ -47,10 +47,11 @@
         <form method="POST" action="/todo_lists/{{$todo_list->id}}" autocomplete="off">
             @method('PUT')
             @csrf
+            <input type="hidden" name="done" value="1">
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-            <div class="row mt-5">
+            <div class="row mt-2">
                 <div class="col">
-                    <input type="text" name="memo" class="form-control-lg form-text" placeholder="メモをここに記載" maxlength="100" value="{{$todo_list->todo}}">
+                    <input type="text" name="todo" class="form-control form-control-lg" placeholder="メモをここに記載" maxlength="100" value="{{$todo_list->todo}}">
                 </div>
             </div>
 
@@ -61,12 +62,31 @@
             </div>
         </form>
 
+        <form method="POST" action="/todo_lists/{{$todo_list->id}}" autocomplete="off">
+            @method('PUT')
+            @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="todo" value="{{$todo_list->todo}}">
+            <div class="row mt-3">
+                <div class="col">
+                    @if (! $todo_list->done)
+                    <input type="hidden" name="done" value="1">
+                    <input type="submit" class="btn btn-secondary" value="完了にする">
+                    @else
+                    <input type="hidden" name="done" value="0">
+                    <input type="submit" class="btn btn-secondary" value="未完了に戻す">
+                    @endif
+                </div>
+            </div>
+        </form>
+
+
         <form method="POST" action="/todo_lists/{{$todo_list->id}}">
             @method('DELETE')
             @csrf
             <div class="row mt-3">
                 <div class="col">
-                    <input type="submit" class="btn btn-danger" value="削除">
+                    <input type="submit" class="btn btn-danger" value="リストから削除">
                 </div>
             </div>
         </form>

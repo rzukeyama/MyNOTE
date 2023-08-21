@@ -48,9 +48,9 @@
             @method('PUT')
             @csrf
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-            <div class="row mt-5">
+            <div class="row mt-2">
                 <div class="col">
-                    <input type="text" name="memo" class="form-control-lg form-text" placeholder="メモをここに記載" maxlength="100" value="{{$memo_line->memo}}">
+                    <input type="text" name="memo" class="form-control form-control-lg" placeholder="メモをここに記載" maxlength="100" value="{{$memo_line->memo}}">
                 </div>
             </div>
 

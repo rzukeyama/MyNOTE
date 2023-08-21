@@ -96,13 +96,13 @@ class TodoListsController extends Controller
     {
         $validated = $request->validate([
             'user_id' => 'required',
-            'memo' => 'required|max:100',
+            'todo' => 'required|max:100',
+            'done' => 'required',
         ]);
 
         $model = TodoList::find($id);
-        $model->memo = $validated['memo'];
 
-        $result = $model->save();
+        $result = $model->fill($validated)->save();
         if (false === $result) {
             // 例外
         }

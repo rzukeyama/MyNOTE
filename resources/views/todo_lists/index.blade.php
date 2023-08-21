@@ -63,9 +63,12 @@
                     @foreach ($todo_list as $todo)
                         <a href="/todo_lists/{{$todo->id}}/edit" class="list-group-item list-group-item-action">
                             <div class="d-flex w-100 justify-content-between">
+                                @if (!$todo->done)
                                 <h5 class="mb-1">{{$todo->todo}}</h5>
+                                @else
+                                <h5 class="mb-1"><s>{{$todo->todo}}</s></h5>
+                                @endif
                             </div>
-                            <small>{{$todo->created_at}}</small>
                         </a>
                     @endforeach
                 </div>
