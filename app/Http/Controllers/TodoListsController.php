@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Messages\GeneralMessages;
 use App\Models\FunctionModel;
-use App\Models\Todolist;
+use App\Models\TodoList;
 use App\Models\UserFunction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
